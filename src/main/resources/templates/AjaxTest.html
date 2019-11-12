@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/js/jquery.min.js"></script>
+</head>
+<body>
+	<input id="id" type="text">
+	<button id="submit">提交</button>
+	
+	<script>
+		$("#submit").click(function(){
+			var id = $("#id").val();
+			var data = {
+					"header":{
+						"msgId":"qqq",
+						"txnSeq":"www",
+						"branchId":"eee",
+						"clientIp":"rrr"
+					},
+					"body":{
+						"productId":id
+					}
+			}
+			
+			$.ajax({
+				type:"POST",
+				contentType:"application/json",
+				url:"http://localhost:8081/prod/ajax",
+				data:JSON.stringify(data),
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					alert("success");
+				},error:function(e){
+					alert("fail");
+				}
+			})
+		});
+	</script>
+</body>
+</html>
